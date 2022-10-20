@@ -9,7 +9,7 @@
     - add_host:
         name: "{{ item }}"
         group: dynamic_hosts
-      with_items: "{{ target_host.split(',') }}"
+      with_items: "{{ target_host.split(', ') }}"
 
 
 - hosts: dynamic_hosts
