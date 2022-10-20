@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_prompt:
+  - name: target_host
+    prompt: please enter the target host IP
+    private: no
+  tasks:
+    - add_host:
+        name: "{{ item }}"
+        group: dynamic_hosts
+      with_items: "{{ target_host.split(',') }}"
+
+
+- hosts: dynamic_hosts
+  vars_files:
+    - multi_hosts_vars.yml
+  tasks:
+    - name: pinging the hosts
+      win_ping:
